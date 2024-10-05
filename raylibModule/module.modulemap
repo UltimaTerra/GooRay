@@ -1,0 +1,8 @@
+module Raylib {
+  header "/home/nicolterra/Documents/GooRay/raylibModule/include/raylib.h"
+  header "/home/nicolterra/Documents/GooRay/raylibModule/include/raymath.h"
+  header "/home/nicolterra/Documents/GooRay/raylibModule/include/rlgl.h"
+  header "/home/nicolterra/Documents/GooRay/raylibModule/include/raygui.h"
+  link "raylib"
+  export *
+}

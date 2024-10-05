@@ -1,0 +1,4 @@
+module raylib {
+    umbrella header "/home/nicolterra/Documents/GooRay/raylibModule/include/raylib.h"
+    export *
+}

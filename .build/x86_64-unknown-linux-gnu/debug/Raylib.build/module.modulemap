@@ -1,0 +1,4 @@
+module Raylib {
+    umbrella "/home/nicolterra/Documents/GooRay/raylibModule/include"
+    export *
+}

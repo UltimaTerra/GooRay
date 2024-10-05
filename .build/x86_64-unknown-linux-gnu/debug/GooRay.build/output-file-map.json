@@ -1,0 +1,17 @@
+{
+  "": {
+    "swift-dependencies": "/home/nicolterra/Documents/GooRay/.build/x86_64-unknown-linux-gnu/debug/GooRay.build/master.swiftdeps"
+  },
+  "/home/nicolterra/Documents/GooRay/Sources/GooRay.swift": {
+    "dependencies": "/home/nicolterra/Documents/GooRay/.build/x86_64-unknown-linux-gnu/debug/GooRay.build/GooRay.d",
+    "object": "/home/nicolterra/Documents/GooRay/.build/x86_64-unknown-linux-gnu/debug/GooRay.build/GooRay.swift.o",
+    "swiftmodule": "/home/nicolterra/Documents/GooRay/.build/x86_64-unknown-linux-gnu/debug/GooRay.build/GooRay~partial.swiftmodule",
+    "swift-dependencies": "/home/nicolterra/Documents/GooRay/.build/x86_64-unknown-linux-gnu/debug/GooRay.build/GooRay.swiftdeps"
+  },
+  "/home/nicolterra/Documents/GooRay/Sources/GooRunner.swift": {
+    "dependencies": "/home/nicolterra/Documents/GooRay/.build/x86_64-unknown-linux-gnu/debug/GooRay.build/GooRunner.d",
+    "object": "/home/nicolterra/Documents/GooRay/.build/x86_64-unknown-linux-gnu/debug/GooRay.build/GooRunner.swift.o",
+    "swiftmodule": "/home/nicolterra/Documents/GooRay/.build/x86_64-unknown-linux-gnu/debug/GooRay.build/GooRunner~partial.swiftmodule",
+    "swift-dependencies": "/home/nicolterra/Documents/GooRay/.build/x86_64-unknown-linux-gnu/debug/GooRay.build/GooRunner.swiftdeps"
+  }
+}

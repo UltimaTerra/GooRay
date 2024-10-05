@@ -1,0 +1,82 @@
+client:
+  name: basic
+  file-system: device-agnostic
+tools: {}
+targets:
+  "GooRay-x86_64-unknown-linux-gnu-debug.exe": ["<GooRay-x86_64-unknown-linux-gnu-debug.exe>"]
+  "GooRay-x86_64-unknown-linux-gnu-debug.module": ["<GooRay-x86_64-unknown-linux-gnu-debug.module>"]
+  "PackageStructure": ["<PackageStructure>"]
+  "Raylib-x86_64-unknown-linux-gnu-debug.module": ["<Raylib-x86_64-unknown-linux-gnu-debug.module>"]
+  "main": ["<GooRay-x86_64-unknown-linux-gnu-debug.exe>","<GooRay-x86_64-unknown-linux-gnu-debug.module>","<Raylib-x86_64-unknown-linux-gnu-debug.module>"]
+  "test": ["<GooRay-x86_64-unknown-linux-gnu-debug.exe>","<GooRay-x86_64-unknown-linux-gnu-debug.module>","<Raylib-x86_64-unknown-linux-gnu-debug.module>"]
+default: "main"
+nodes:
+  "/home/nicolterra/Documents/GooRay/Sources/":
+    is-directory-structure: true
+    content-exclusion-patterns: [".git",".build"]
+  "/home/nicolterra/Documents/GooRay/raylibModule/":
+    is-directory-structure: true
+    content-exclusion-patterns: [".git",".build"]
+commands:
+  "/home/nicolterra/Documents/GooRay/.build/x86_64-unknown-linux-gnu/debug/GooRay.build/GooRay.swiftmodule.o":
+    tool: shell
+    inputs: ["/home/nicolterra/Documents/GooRay/.build/x86_64-unknown-linux-gnu/debug/Modules/GooRay.swiftmodule"]
+    outputs: ["/home/nicolterra/Documents/GooRay/.build/x86_64-unknown-linux-gnu/debug/GooRay.build/GooRay.swiftmodule.o"]
+    description: "Wrapping AST for GooRay for debugging"
+    args: ["/opt/swift-6.0/usr/bin/swiftc","-modulewrap","/home/nicolterra/Documents/GooRay/.build/x86_64-unknown-linux-gnu/debug/Modules/GooRay.swiftmodule","-o","/home/nicolterra/Documents/GooRay/.build/x86_64-unknown-linux-gnu/debug/GooRay.build/GooRay.swiftmodule.o","-target","x86_64-unknown-linux-gnu"]
+
+  "/home/nicolterra/Documents/GooRay/.build/x86_64-unknown-linux-gnu/debug/GooRay.build/sources":
+    tool: write-auxiliary-file
+    inputs: ["<sources-file-list>","/home/nicolterra/Documents/GooRay/Sources/GooRay.swift","/home/nicolterra/Documents/GooRay/Sources/GooRunner.swift"]
+    outputs: ["/home/nicolterra/Documents/GooRay/.build/x86_64-unknown-linux-gnu/debug/GooRay.build/sources"]
+    description: "Write auxiliary file /home/nicolterra/Documents/GooRay/.build/x86_64-unknown-linux-gnu/debug/GooRay.build/sources"
+
+  "/home/nicolterra/Documents/GooRay/.build/x86_64-unknown-linux-gnu/debug/GooRay.product/Objects.LinkFileList":
+    tool: write-auxiliary-file
+    inputs: ["<link-file-list>","/home/nicolterra/Documents/GooRay/.build/x86_64-unknown-linux-gnu/debug/GooRay.build/GooRay.swift.o","/home/nicolterra/Documents/GooRay/.build/x86_64-unknown-linux-gnu/debug/GooRay.build/GooRay.swiftmodule.o","/home/nicolterra/Documents/GooRay/.build/x86_64-unknown-linux-gnu/debug/GooRay.build/GooRunner.swift.o"]
+    outputs: ["/home/nicolterra/Documents/GooRay/.build/x86_64-unknown-linux-gnu/debug/GooRay.product/Objects.LinkFileList"]
+    description: "Write auxiliary file /home/nicolterra/Documents/GooRay/.build/x86_64-unknown-linux-gnu/debug/GooRay.product/Objects.LinkFileList"
+
+  "/home/nicolterra/Documents/GooRay/.build/x86_64-unknown-linux-gnu/debug/swift-version-7275AC7A13D5876C.txt":
+    tool: write-auxiliary-file
+    inputs: ["<swift-get-version>","/opt/swift-6.0/usr/bin/swiftc"]
+    outputs: ["/home/nicolterra/Documents/GooRay/.build/x86_64-unknown-linux-gnu/debug/swift-version-7275AC7A13D5876C.txt"]
+    always-out-of-date: "true"
+    description: "Write auxiliary file /home/nicolterra/Documents/GooRay/.build/x86_64-unknown-linux-gnu/debug/swift-version-7275AC7A13D5876C.txt"
+
+  "<GooRay-x86_64-unknown-linux-gnu-debug.exe>":
+    tool: phony
+    inputs: ["/home/nicolterra/Documents/GooRay/.build/x86_64-unknown-linux-gnu/debug/GooRay"]
+    outputs: ["<GooRay-x86_64-unknown-linux-gnu-debug.exe>"]
+
+  "<GooRay-x86_64-unknown-linux-gnu-debug.module>":
+    tool: phony
+    inputs: ["/home/nicolterra/Documents/GooRay/.build/x86_64-unknown-linux-gnu/debug/GooRay.build/GooRay.swift.o","/home/nicolterra/Documents/GooRay/.build/x86_64-unknown-linux-gnu/debug/GooRay.build/GooRunner.swift.o","/home/nicolterra/Documents/GooRay/.build/x86_64-unknown-linux-gnu/debug/Modules/GooRay.swiftmodule"]
+    outputs: ["<GooRay-x86_64-unknown-linux-gnu-debug.module>"]
+
+  "<Raylib-x86_64-unknown-linux-gnu-debug.module>":
+    tool: phony
+    inputs: []
+    outputs: ["<Raylib-x86_64-unknown-linux-gnu-debug.module>"]
+
+  "C.GooRay-x86_64-unknown-linux-gnu-debug.exe":
+    tool: shell
+    inputs: ["/home/nicolterra/Documents/GooRay/.build/x86_64-unknown-linux-gnu/debug/GooRay.build/GooRay.swift.o","/home/nicolterra/Documents/GooRay/.build/x86_64-unknown-linux-gnu/debug/GooRay.build/GooRay.swiftmodule.o","/home/nicolterra/Documents/GooRay/.build/x86_64-unknown-linux-gnu/debug/GooRay.build/GooRunner.swift.o","/home/nicolterra/Documents/GooRay/.build/x86_64-unknown-linux-gnu/debug/GooRay.product/Objects.LinkFileList"]
+    outputs: ["/home/nicolterra/Documents/GooRay/.build/x86_64-unknown-linux-gnu/debug/GooRay"]
+    description: "Linking ./.build/x86_64-unknown-linux-gnu/debug/GooRay"
+    args: ["/opt/swift-6.0/usr/bin/swiftc","-v","-L","/home/nicolterra/Documents/GooRay/.build/x86_64-unknown-linux-gnu/debug","-o","/home/nicolterra/Documents/GooRay/.build/x86_64-unknown-linux-gnu/debug/GooRay","-module-name","GooRay","-emit-executable","-Xlinker","--defsym","-Xlinker","main=GooRay_main","-Xlinker","-rpath=$ORIGIN","@/home/nicolterra/Documents/GooRay/.build/x86_64-unknown-linux-gnu/debug/GooRay.product/Objects.LinkFileList","-target","x86_64-unknown-linux-gnu","-lraylib","-lm","-ldl","-lpthread","-lrt","-lX11","-g"]
+
+  "C.GooRay-x86_64-unknown-linux-gnu-debug.module":
+    tool: shell
+    inputs: ["/home/nicolterra/Documents/GooRay/Sources/GooRay.swift","/home/nicolterra/Documents/GooRay/Sources/GooRunner.swift","/home/nicolterra/Documents/GooRay/.build/x86_64-unknown-linux-gnu/debug/swift-version-7275AC7A13D5876C.txt","/home/nicolterra/Documents/GooRay/.build/x86_64-unknown-linux-gnu/debug/GooRay.build/sources"]
+    outputs: ["/home/nicolterra/Documents/GooRay/.build/x86_64-unknown-linux-gnu/debug/GooRay.build/GooRay.swift.o","/home/nicolterra/Documents/GooRay/.build/x86_64-unknown-linux-gnu/debug/GooRay.build/GooRunner.swift.o","/home/nicolterra/Documents/GooRay/.build/x86_64-unknown-linux-gnu/debug/Modules/GooRay.swiftmodule"]
+    description: "Compiling Swift Module 'GooRay' (2 sources)"
+    args: ["/opt/swift-6.0/usr/bin/swiftc","-module-name","GooRay","-emit-dependencies","-emit-module","-emit-module-path","/home/nicolterra/Documents/GooRay/.build/x86_64-unknown-linux-gnu/debug/Modules/GooRay.swiftmodule","-output-file-map","/home/nicolterra/Documents/GooRay/.build/x86_64-unknown-linux-gnu/debug/GooRay.build/output-file-map.json","-incremental","-c","@/home/nicolterra/Documents/GooRay/.build/x86_64-unknown-linux-gnu/debug/GooRay.build/sources","-I","/home/nicolterra/Documents/GooRay/.build/x86_64-unknown-linux-gnu/debug/Modules","-target","x86_64-unknown-linux-gnu","-v","-enable-batch-mode","-index-store-path","/home/nicolterra/Documents/GooRay/.build/x86_64-unknown-linux-gnu/debug/index/store","-Onone","-enable-testing","-j4","-DSWIFT_PACKAGE","-DDEBUG","-Xcc","-fmodule-map-file=/home/nicolterra/Documents/GooRay/.build/x86_64-unknown-linux-gnu/debug/Raylib.build/module.modulemap","-Xcc","-I","-Xcc","/home/nicolterra/Documents/GooRay/raylibModule/include","-module-cache-path","/home/nicolterra/Documents/GooRay/.build/x86_64-unknown-linux-gnu/debug/ModuleCache","-parseable-output","-Xfrontend","-entry-point-function-name","-Xfrontend","GooRay_main","-color-diagnostics","-swift-version","6","-g","-Xcc","-fPIC","-Xcc","-g","-package-name","gooray","-Xcc","-fno-omit-frame-pointer"]
+
+  "PackageStructure":
+    tool: package-structure-tool
+    inputs: ["/home/nicolterra/Documents/GooRay/Sources/","/home/nicolterra/Documents/GooRay/raylibModule/","/home/nicolterra/Documents/GooRay/Package.swift","/home/nicolterra/Documents/GooRay/Package.resolved"]
+    outputs: ["<PackageStructure>"]
+    description: "Planning build"
+    allow-missing-inputs: true
+
